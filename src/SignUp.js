@@ -2,36 +2,47 @@ import React from "react";
 
 import getFirebase from "./Firebase/Firebase";
 import useInput from "./CustomHooks/useInput";
+import {AuthSignUp} from './Api/Auth'
+import {useHistory} from 'react-router-dom';
 
 const SignUp = () => {
-  const firebaseInstance = getFirebase();
+//   const firebaseInstance = getFirebase();
   const email = useInput("");
   const password = useInput("");
+  let history = useHistory();
 
-  const signUp = async (event) => {
-    event.preventDefault();
+  
+  function RedirectToSignIn(){
+    history.push('/signin')
+  }
 
-    try {
-      if (firebaseInstance) {
-        const user = await firebaseInstance
-          .auth()
-          .createUserWithEmailAndPassword(email.value, password.value);
-        console.log("user", user);
-        alert(`Welcome ${email.value}!`);
-      }
-    } catch (error) {
-      console.log("error", error);
-      alert(error.message);
-    }
-  };
+//   const signUp = async (event) => {
+//     event.preventDefault();
+
+//     try {
+//       if (firebaseInstance) {
+//         const user = await firebaseInstance
+//           .auth()
+//           .createUserWithEmailAndPassword(email.value, password.value);
+//         console.log("user", user);
+//         alert(`Welcome ${email.value}!`);
+//       }
+//     } catch (error) {
+//       console.log("error", error);
+//       alert(error.message);
+//     }
+//   };
 
   return (
-    <form onSubmit={signUp}>
+    <div className="auth-container">
+    <form className="auth-box" onSubmit={(e)=>AuthSignUp(e,email,password,history)}>
       <h1>Sign up</h1>
-      <input placeholder="Email" {...email} />
-      <input placeholder="Password" type="password" {...password} />
-      <button type="submit">Sign up</button>
+      <input style={{marginTop:20}} placeholder="Email" {...email} />
+      <input style={{marginTop:20}} placeholder="Password" type="password" {...password} />
+      <button style={{marginTop:20}} type="submit">Sign up</button>
+      <button style={{marginTop:20}} onClick={RedirectToSignIn}>Already have account</button>
     </form>
+    </div>
   );
 };
 

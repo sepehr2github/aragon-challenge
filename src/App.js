@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-// import styled from "styled-components";
+import React, { useState, useEffect, Suspense, lazy } from "react";
+import { BrowserRouter as Router, Route, Switch, useHistory} from 'react-router-dom';
 import getFirebase from "./Firebase/Firebase";
 import Web3 from 'web3'
 // import ethers from 'ethers';
@@ -9,10 +9,16 @@ import SignIn from "./SignIn";
 import {
   GetCryptoList
 }from './Api/Api.js'
-// import SignOutButton from "./SignOutButton";
+import {Provider} from 'react-redux'
+import store from "./Redux/store";
+import Loading from './Components/Loading'
+import Apps from './Apps/index'
 
-export default function App() {
+export default function App(props) {
   const [currentUser, setCurrentUser] = useState(null);
+  const SignIn = lazy(() => import('./SignIn'));
+  const SignUp = lazy(() => import('./SignUp'));
+
 
   useEffect(() => {
     const firebase = getFirebase();
@@ -27,7 +33,23 @@ export default function App() {
       });
     }
 
-    GetCryptoList();
+    // GetCryptoList();
+
+
+    let Token = localStorage.getItem('Token')
+    if (window.location.pathname === '/') {
+      console.log('ttoken',Token)
+      if (Token === null) {
+        window.location.replace('/signin')
+      }else{
+        window.location.replace('/Home')
+      }
+      // } else if (initURL === '' || initURL === '/' || initURL === '/signin' || initURL === '/signup' || initURL === '/forgetpass') {
+      //   return ( <Redirect to={'/app/dashboard'}/> );
+      // } else {
+      //   return ( <Redirect to={initURL}/> );
+      // }
+    }
 
   //   if (window.ethereum) {
   //     let web3 = new Web3(window.ethereum);
@@ -60,60 +82,21 @@ export default function App() {
   // console.log('check All',balance)
   }, []);
 
-  return (
-    <div>
-      {/* <img src={backgroundImage} alt="background" /> */}
-      <h1>Firebase Auth</h1>
-      <h2>
-        Set up authentication in your React project with Firebase Auth
-      </h2>
-      <h2>
-        {currentUser
-          ? `The current logged in user is: ${currentUser}.`
-          : "No user is currently logged in."}
-      </h2>
-      <SignUp />
-      <SignIn />
-      <MetaMaskInterface/>
+  return(
+    <Provider store={store}>
+        <div>
+            <Router>
+              <Suspense fallback={Loading}>
+                <Switch>
+                  <Route path="/signin" component={SignIn}/>
+                  <Route path="/signup" component={SignUp}/>
+                  <Route path="/apps" component={Apps}/>
+                  {/* <Route path="*" component={NotFound}/> */}
+                </Switch>
+              </Suspense>
+            </Router>
+          </div>
+    </Provider>
+  )
 
-      {/* <SignOutButton /> */}
-    </div>
-  );
 }
-
-// const Wrapper = styled.div`
-//   padding-top: 150px;
-//   margin: 0 auto;
-//   display: grid;
-//   justify-items: center;
-//   padding-bottom: 100px;
-// `;
-
-// const Title = styled.h1`
-//   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-//     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-//   font-style: normal;
-//   font-weight: bold;
-//   font-size: 40px;
-//   line-height: 48px;
-//   color: #ffffff;
-//   text-align: center;
-// `;
-
-// const Description = styled.h2`
-//   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-//     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-//   font-style: normal;
-//   font-weight: bold;
-//   font-size: 20px;
-//   line-height: 48px;
-//   color: #000;
-//   text-align: center;
-// `;
-
-// const Background = styled.img`
-//   position: absolute;
-//   width: 100%;
-//   top: 0px;
-//   z-index: -1;
-// `;
