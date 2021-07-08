@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 // import styled from "styled-components";
 import getFirebase from "./Firebase/Firebase";
-
+import Web3 from 'web3'
+// import ethers from 'ethers';
 import SignUp from "./SignUp";
-
+import MetaMaskInterface from './MetaMaskInterface'
 import SignIn from "./SignIn";
+import {
+  GetCryptoList
+}from './Api/Api.js'
 // import SignOutButton from "./SignOutButton";
 
 export default function App() {
@@ -22,6 +26,38 @@ export default function App() {
         }
       });
     }
+
+    GetCryptoList();
+
+  //   if (window.ethereum) {
+  //     let web3 = new Web3(window.ethereum);
+  //     try { 
+  //        window.ethereum.enable().then(function() {
+  //           web3.eth.getAccounts().then(function(response){
+  //             web3.eth.getBalance(response[0])
+  //             .then(console.log)
+  //           });
+  //            // User has allowed account access to DApp...
+  //        });
+  //     } catch(e) {
+  //        // User has denied account access to DApp...
+  //     }
+  //  }
+  //  // Legacy DApp Browsers
+  //  else if (window.web3) {
+  //     let web3 = new Web3(window.web3.currentProvider);
+  //  }
+  //  // Non-DApp Browsers
+  //  else {
+  //      alert('You have to install MetaMask !');
+  //  }
+
+  // const provider = new window.ethers.providers.Web3Provider(window.ethereum)
+  // const signer = provider.getSigner()
+
+  // const balance = provider.getBalance("ethers.eth")
+
+  // console.log('check All',balance)
   }, []);
 
   return (
@@ -38,6 +74,7 @@ export default function App() {
       </h2>
       <SignUp />
       <SignIn />
+      <MetaMaskInterface/>
 
       {/* <SignOutButton /> */}
     </div>
