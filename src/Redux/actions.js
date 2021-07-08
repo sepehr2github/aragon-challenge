@@ -24,8 +24,8 @@ export const EnableContactModal = () => {
     data: false
   });
   
-  export const SetLanguageSetting = (data) => ({
-    type: 'SetLanguageSettingData',
+  export const SetCryptoList = (data) => ({
+    type: 'crypto_list',
     data: data
   })
   

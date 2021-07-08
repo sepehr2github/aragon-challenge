@@ -140,3 +140,16 @@
   min-height:60vh;
   padding: 1rem;
 }
+
+.balance-container{
+  display: flex;
+}
+
+.balance-box{
+  padding: 1rem;
+  margin:1rem;
+  border-radius: 10px;
+  width: 20rem;
+  background-color: #262637;
+}
+
