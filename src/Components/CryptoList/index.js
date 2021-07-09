@@ -49,8 +49,8 @@ export default function CryptoList() {
         <TableBody>
           {List.data.map((row,index) => (
             <TableRow key={index}>
-              <TableCell  style={{color:'white'}}>-</TableCell>
-              <TableCell  style={{color:'white'}} align="center">-</TableCell>
+              <TableCell  style={{color:'white'}}>{row.name}</TableCell>
+              <TableCell  style={{color:'white'}} align="center">{row.quote['USD'].price}$</TableCell>
             </TableRow>
           ))}
         </TableBody>

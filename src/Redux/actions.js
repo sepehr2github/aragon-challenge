@@ -13,19 +13,20 @@ export const EnableContactModal = () => {
       data: false
     }
   };
-  
-  export const EnableSplashScreen = () => ({
-    type: 'splashscreen',
-    data: true
-  });
-  
-  export const DisableSplashScreen = () => ({
-    type: 'splashscreen',
-    data: false
-  });
+
   
   export const SetCryptoList = (data) => ({
     type: 'crypto_list',
+    data: data
+  })
+
+  export const SetTokenBalance = (data) => ({
+    type: 'token_balance',
+    data: data
+  })
+  
+  export const SetTotalSupply = (data) => ({
+    type: 'total_supply',
     data: data
   })
   

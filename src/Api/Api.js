@@ -3,6 +3,7 @@ import {useDispatch} from 'react-redux'
 import {
     SetCryptoList
 }from '../Redux/actions.js'
+import ToastManager from '../Utils/ToastManager.js';
 
 export const GetCryptoList = () => {
     const dispatch = useDispatch()
@@ -13,9 +14,16 @@ export const GetCryptoList = () => {
     })
     .then(function ({data}) {
         console.log('check response',data.data.slice(0,5))
-        dispatch(SetCryptoList({data:data.data.slice(0,5),length:5}))
+        let TempList = data.data.slice(0,5)
+        data.data.map((coin)=>{
+            if(coin.name === 'Aragon'){
+                TempList.push(coin)
+            }
+        })
+        dispatch(SetCryptoList({data:TempList,length:5}))
     })
     .catch(function (error) {
-       console.log("Error****}{}", error.message);
+        ToastManager('error',error.message)
+        console.log("Error****}{}", error.message);
     })
 };

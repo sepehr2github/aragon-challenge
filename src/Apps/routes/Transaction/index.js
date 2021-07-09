@@ -5,7 +5,7 @@ export default function Transaction(){
         <>
             <h1>Transaction</h1>
             <div className="logs-container">
-                test
+                
             </div>
         </>
     )
