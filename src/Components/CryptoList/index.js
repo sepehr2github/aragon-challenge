@@ -13,7 +13,8 @@ const useStyles = makeStyles({
   table: {
     minWidth: 650,
     backgroundColor:'#262637',
-    color:'#fffff'
+    color:'#fffff',
+    paddingBottom:50
   },
 });
 
@@ -32,12 +33,23 @@ const rows = [
 export default function CryptoList() {
     const List = useSelector(state => state.data.CryptoList)
     if(List.length === 0){
-        // GetCryptoList();
+      // GetCryptoList();
+      setInterval(()=>{
+        GetCryptoList(); 
+      },10000) 
     }
     const classes = useStyles();
     console.log('Listed',List)
 
   return (
+    <>
+    <div>
+      <p>
+        Update will be every 10 Seconds
+        <br/>
+        Please sign in https://cors-anywhere.herokuapp.com
+      </p>
+    </div>
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
@@ -56,5 +68,6 @@ export default function CryptoList() {
         </TableBody>
       </Table>
     </TableContainer>
+    </>
   );
 }

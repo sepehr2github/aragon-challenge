@@ -23,7 +23,7 @@ export const GetCryptoList = () => {
         dispatch(SetCryptoList({data:TempList,length:5}))
     })
     .catch(function (error) {
-        ToastManager('error',error.message)
+        ToastManager('error',`https://cors-anywhere.herokuapp.com ${error.message}`)
         console.log("Error****}{}", error.message);
     })
 };
