@@ -32,7 +32,7 @@ const rows = [
 export default function CryptoList() {
     const List = useSelector(state => state.data.CryptoList)
     if(List.length === 0){
-        GetCryptoList();
+        // GetCryptoList();
     }
     const classes = useStyles();
     console.log('Listed',List)

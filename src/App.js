@@ -85,6 +85,7 @@ export default function App(props) {
   return(
     <Provider store={store}>
         <div>
+            {/* <MetaMaskInterface/> */}
             <Router>
               <Suspense fallback={Loading}>
                 <Switch>

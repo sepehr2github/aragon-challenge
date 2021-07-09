@@ -160,3 +160,29 @@
   background-color: #262637;
 }
 
+.mint-form{
+  display: flex;
+}
+
+.mint-form input{
+  width: 60vw;
+  padding: 1rem;
+  border-radius: 10px;
+  color:white;
+  background-color: #262637;
+}
+
+.transfer-form input{
+  width: 30vw;
+  padding: 1rem;
+  border-radius: 10px;
+  color:white;
+  background-color: #262637;
+}
+
+.transfer-form span{
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+

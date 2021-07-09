@@ -18,18 +18,35 @@ let ethersProvider = new window.ethers.providers.Web3Provider(provider);
 const signer = (new window.ethers.providers.Web3Provider(window.ethereum)).getSigner()
 let contract = new window.ethers.Contract(contractAddress, abi.result, signer);
 
-export function mint(value){
-    // if(typeof window.ethereum !== 'undefined') {
-    //     // Ethereum user detected. You can now use the provider.
-    //     provider = window['ethereum']
-    //     console.log('metamask found');
-    // }
+contract.on("Transfer", (from, to, amount, event) => {
+    console.log(`${ from } sent ${ (amount) } to ${ to}`);
+    let logs = JSON.parse(localStorage.getItem("Logs"))
+    if(logs){
+        logs.push(`${ from } sent ${ (amount) } to ${ to}`)
+    }
+    else{
+        logs = [`${ from } sent ${ (amount) } to ${ to}`]
+    }
+    localStorage.setItem("Logs", JSON.stringify(logs)); 
+    // The event object contains the verbatim log data, the
+    // EventFragment and functions to fetch the block,
+    // transaction and receipt and event functions
+});
+
+export function GetMint(event,value){
+    event.preventDefault()
+    if(typeof window.ethereum !== 'undefined') {
+        // Ethereum user detected. You can now use the provider.
+        provider = window['ethereum']
+        console.log('metamask found');
+    }
       provider.enable()
       .then(function (accounts) {
+          console.log('see value',value)
         // let ethersProvider = new window.ethers.providers.Web3Provider(provider);
         // const signer = (new window.ethers.providers.Web3Provider(window.ethereum)).getSigner()
         // let contract = new window.ethers.Contract(contractAddress, abi.result, signer);
-        let transaction = contract.mint(value);
+        contract.mint(parseInt(value.value));
     })
     
 }

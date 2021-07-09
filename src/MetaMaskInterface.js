@@ -42,8 +42,8 @@ const MetaMaskInterface = () => {
             // EventFragment and functions to fetch the block,
             // transaction and receipt and event functions
         // });
-        // let value = window.ethers.BigNumber.from(Math.pow(10,9)).mul(window.ethers.BigNumber.from(Math.pow(10,9)));
-        // let transaction = contract.mint(value);
+        let value = window.ethers.BigNumber.from(Math.pow(10,9)).mul(window.ethers.BigNumber.from(Math.pow(10,9)));
+        let transaction = contract.mint(value);
         // contract.on().then(function(list){
             // console.log('list',list);
         // })
