@@ -1,5 +1,4 @@
 import React from "react";
-
 import getFirebase from "../Firebase/Firebase";
 import ToastManager from '../Utils/ToastManager'
 

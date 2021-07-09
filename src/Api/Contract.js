@@ -42,12 +42,9 @@ export function GetMint(event,value){
     event.preventDefault()
       provider.enable()
       .then(function (accounts) {
-          console.log('see value',value)
-        // let ethersProvider = new window.ethers.providers.Web3Provider(provider);
-        // const signer = (new window.ethers.providers.Web3Provider(window.ethereum)).getSigner()
-        // let contract = new window.ethers.Contract(contractAddress, abi.result, signer);
         contract.mint(parseInt(value.value)).catch(function(error){
-            console.log('ViewError',error)
+            ToastManager('warn',
+            `Transaction Started!`) 
         });
     }).catch(function (error) {
         // Handle error. Likely the user rejected the login
@@ -59,17 +56,9 @@ export function GetMint(event,value){
 
 export function TransferToken(event,destination,amount){
     event.preventDefault()
-    // if(typeof window.ethereum !== 'undefined') {
-    //     // Ethereum user detected. You can now use the provider.
-    //     provider = window['ethereum']
-    //     console.log('metamask found');
-    // }
     console.log('CheckVal',destination.value,amount.value)
       provider.enable()
       .then(function (accounts) {
-        // let ethersProvider = new window.ethers.providers.Web3Provider(provider);
-        // const signer = (new window.ethers.providers.Web3Provider(window.ethereum)).getSigner()
-        // let contract = new window.ethers.Contract(contractAddress, abi.result, signer);
         contract.balanceOf(accounts[0]).then(function(value){
             let myBalance = parseInt(value, 10);
             if( myBalance >  amount.value){
@@ -93,16 +82,8 @@ export function TransferToken(event,destination,amount){
 
 export function GetBalance(value){
     const dispatch = useDispatch()
-    // if(typeof window.ethereum !== 'undefined') {
-    //     // Ethereum user detected. You can now use the provider.
-    //     provider = window['ethereum']
-    //     console.log('metamask found');
-    // }
       provider.enable()
       .then((accounts) => {
-        // let ethersProvider = new window.ethers.providers.Web3Provider(provider);
-        // const signer = (new window.ethers.providers.Web3Provider(window.ethereum)).getSigner()
-        // let contract = new window.ethers.Contract(contractAddress, abi.result, signer);
         contract.balanceOf(accounts[0]).then(function(value){
             dispatch(SetTokenBalance(parseInt(value, 10)))
             console.log('Value',parseInt(value, 10),value,accounts[0]);
@@ -116,11 +97,6 @@ export function GetBalance(value){
 
 export function GetSupply(value){
     const dispatch = useDispatch()
-    // if(typeof window.ethereum !== 'undefined') {
-    //     // Ethereum user detected. You can now use the provider.
-    //     provider = window['ethereum']
-    //     console.log('metamask found');
-    // }
       provider.enable()
       .then((accounts) => {
         contract.totalSupply().then(function(value){

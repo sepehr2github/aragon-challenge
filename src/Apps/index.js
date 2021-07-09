@@ -6,14 +6,15 @@ export default function Apps({match}){
     const Home = lazy(() => import('./routes/Home/index'));
     const Logs = lazy(() => import('./routes/Logs/index'));
     const Transaction = lazy(() => import('./routes/Transaction/index'));
-    console.log('match',match)
     let history = useHistory();
+
     useEffect(()=>{
       let Token = localStorage.getItem('Token')
       if (Token === null) {
         history.push('/signin')
       }
     },[])
+    
     return(
         <div>
             <Sidebar/>
