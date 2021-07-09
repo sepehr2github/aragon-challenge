@@ -8,7 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {useSelector} from 'react-redux'
-import {GetCryptoList} from '../../Api/Api'
+
 
 const useStyles = makeStyles({
   table: {
@@ -21,11 +21,10 @@ const useStyles = makeStyles({
 
 export default function CryptoList() {
     const List = useSelector(state => state.data.CryptoList)
-    if(List.length === 0){
-      // setTimeout(()=>{
-        GetCryptoList(); 
+    // if(List.length === 0){
+      // setTimeout(()=>{ 
       // },10000) 
-    }
+    // }
     const classes = useStyles();
 
   return (
