@@ -4,6 +4,7 @@ import {
 }from '@material-ui/core'
 import useInput from '../../CustomHooks/useInput'
 import {GetMint} from '../../Api/Contract'
+
 export default function MintFunction(){
     const value = useInput("");
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import cogoToast from "cogo-toast";
 
-function ToastManager(type,message){
+function ToastManager(type,message,time = 6){
 
     let child = <div className="mx-2">
                     <span>
@@ -14,17 +14,17 @@ function ToastManager(type,message){
         case 'error':
             cogoToast.error(
                 child
-                , {position: 'top-left', hideAfter: 6});
+                , {position: 'top-left', hideAfter: time});
                 break;
         case 'success':
             cogoToast.success(
                 child
-                , {position: 'top-left', hideAfter: 6});
+                , {position: 'top-left', hideAfter: time});
                 break;
         case 'warn':
             cogoToast.warn(
                 child
-                , {position: 'top-left', hideAfter: 6});
+                , {position: 'top-left', hideAfter: time});
                 break;
         default:
             break;
