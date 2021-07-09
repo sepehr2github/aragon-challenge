@@ -42,7 +42,7 @@ export default function App(props) {
       if (Token === null) {
         window.location.replace('/signin')
       }else{
-        window.location.replace('/Home')
+        window.location.replace('/apps/home')
       }
       // } else if (initURL === '' || initURL === '/' || initURL === '/signin' || initURL === '/signup' || initURL === '/forgetpass') {
       //   return ( <Redirect to={'/app/dashboard'}/> );
