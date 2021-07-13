@@ -43,6 +43,7 @@ export default function App(props) {
             <Router>
               <Suspense fallback={Loading}>
                 <Switch>
+                  <Route exact path="/" component={Apps}/>
                   <Route path="/signin" component={SignIn}/>
                   <Route path="/signup" component={SignUp}/>
                   <Route path="/apps" component={Apps}/>
